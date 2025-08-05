@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "vue.features.scriptSetup": true,
+  "vetur.validation.template": false,  // ปิด Vetur ถ้ามี
+  "volar.takeOverMode.enabled": true   // ใช้ Volar แทน Vetur
+}
