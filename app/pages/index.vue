@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FoodCard from '~/components/FoodCard.vue'
+import FoodCard from '~/components/Foodcard.vue'
 import { ref } from 'vue'
 import type { Product } from '../../types/types';
 import { useBookingStore } from '~/store/useBookingStore'

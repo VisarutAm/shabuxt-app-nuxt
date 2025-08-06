@@ -66,6 +66,7 @@ import type { Product } from "../../../../types/types";
 const route = useRoute();
 const router = useRouter();
 
+
 const form = ref<Product>({
   id: 0,
   name: "",
@@ -80,14 +81,16 @@ const isSubmitting = ref(false);
 
 const fetchProduct = async (id: number) => {
   try {
-    const data = await $fetch<Product>(`/api/products/${id}`);
-    form.value = data;
-    previewImage.value = data.image_url;
+    const data = await $fetch<{data:Product}>(`/api/admin/${id}`);
+    form.value = data.data;    
+    console.log("📦 Product data fetched:", data);
+    previewImage.value = data.data.image_url;
   } catch (error) {
     alert("โหลดข้อมูลสินค้าไม่สำเร็จ");
     router.push("/admin/products");
   }
 };
+
 
 onMounted(() => {
   const id = Number(route.params.id);
@@ -114,7 +117,7 @@ const handleSubmit = async () => {
 
   try {
     const res = await $fetch<{ success: boolean; message?: string }>(
-      `/api/products/${form.value.id}`,
+      `/api/admin/${form.value.id}`,
       {
         method: "PUT",
         body: form.value,

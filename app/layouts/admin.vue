@@ -33,11 +33,11 @@ const logout = () => {
       </NuxtLink>
 
       <NuxtLink
-        to="/admin/orders"
+        to="/admin/bookings"
         class="block px-3 py-2 rounded hover:bg-purple-700"
-        :class="{ 'bg-purple-900 font-semibold': $route.path === '/admin/orders' }"
+        :class="{ 'bg-purple-900 font-semibold': $route.path === '/admin/booking' }"
       >
-        📑 Orders
+        📑 Bookings
       </NuxtLink>
         </div>
      <!-- Logout Button -->

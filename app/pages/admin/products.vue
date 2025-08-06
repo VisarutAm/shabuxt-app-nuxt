@@ -49,6 +49,7 @@
 // @ts-ignore
 definePageMeta({
   layout: "admin",
+   middleware: 'admin'
 });
 import type { Product } from "../../../types/types";
 const router = useRouter();

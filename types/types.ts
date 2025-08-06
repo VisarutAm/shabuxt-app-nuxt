@@ -17,6 +17,7 @@ export interface MenuItem {
 }
 
 export interface Booking {
+  id: number;
   table_number: number | null;
   booking_name: string;
   items: MenuItem[];
