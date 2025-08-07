@@ -1,21 +1,8 @@
 <script setup lang="ts">
 import { useBookingStore } from '~/store/useBookingStore'
-import { watch } from 'vue'
-const bookingStore = useBookingStore ()
-// ตัวอย่าง watch items
-watch(
-  () => bookingStore,
-  (newBooking, oldBooking) => {
-    console.log('Booking store changed:')
-    console.log('Table number:', newBooking.table_number)
-    console.log('Booking name:', newBooking.booking_name)
-    console.log('Items:', newBooking.items)
-    console.log('Amount:', newBooking.amount)
-  },
-  { deep: true }
-)
 
-// Props สำหรับรับข้อมูลอาหาร
+const bookingStore = useBookingStore ()
+
 const props = defineProps<{
   food: {
     id: number

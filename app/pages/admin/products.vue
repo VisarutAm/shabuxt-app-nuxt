@@ -20,8 +20,6 @@
             <p class="text-lg font-semibold text-gray-800">
               {{ product.name }}
             </p>
-            <!-- เพิ่มข้อมูลอื่นถ้าต้องการ -->
-            <!-- <p class="text-sm text-gray-500">{{ product.description }}</p> -->
           </div>
 
           <!-- ปุ่มแก้ไข/ลบ -->
@@ -49,35 +47,47 @@
 // @ts-ignore
 definePageMeta({
   layout: "admin",
-   middleware: 'admin'
+  middleware: "admin",
 });
+
+import { useToast } from "vue-toastification";
 import type { Product } from "../../../types/types";
 const router = useRouter();
+const toast = useToast();
+import Swal from "sweetalert2";
 
 const editProduct = (id: number) => {
   router.push(`/admin/edit/${id}`);
 };
 
 const deleteProduct = async (id: number) => {
-  const confirmDelete = confirm("คุณแน่ใจหรือว่าต้องการลบสินค้านี้?");
-  if (!confirmDelete) return;
+  const result = await Swal.fire({
+    title: "คุณแน่ใจไหม?",
+    text: "คุณต้องการลบสินค้านี้จริงหรือไม่",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "ใช่, ลบเลย!",
+    cancelButtonText: "ยกเลิก",
+    confirmButtonColor: "#e3342f",
+    cancelButtonColor: "#6c757d",
+  });
+
+  if (!result.isConfirmed) return;
 
   try {
     const res = await $fetch<{ success: boolean; message?: string }>(
       `/api/admin/${id}`,
-      {
-        method: "DELETE",
-      }
+      { method: "DELETE" }
     );
 
     if (res.success) {
-      alert("ลบสินค้าสำเร็จแล้ว");
-      await fetchProducts(); // โหลดข้อมูลใหม่หลังลบ
+      await Swal.fire("ลบสำเร็จ!", "", "success");
+      await fetchProducts();
     } else {
       throw new Error(res.message || "ลบสินค้าไม่สำเร็จ");
     }
   } catch (err: any) {
-    alert(err.message || "เกิดข้อผิดพลาดในการลบ");
+    Swal.fire("เกิดข้อผิดพลาด", err.message || "ลบไม่สำเร็จ", "error");
   }
 };
 
@@ -87,12 +97,11 @@ const fetchProducts = async () => {
     const data = await $fetch<Product[]>("/api/products");
     productData.value = data;
   } catch (error) {
-    alert("โหลดข้อมูลสินค้าไม่สำเร็จ");
+    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ");
   }
 };
 
 onMounted(async () => {
   await fetchProducts();
-  console.log("📦 productData เปลี่ยน:", productData.value);
 });
 </script>

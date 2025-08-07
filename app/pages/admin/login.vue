@@ -36,7 +36,7 @@
 <script setup lang="ts">
 // @ts-ignore
 definePageMeta({
-  layout: "empty", // หรือ layout: false
+  layout: "empty",
   middleware: "redirect-if-auth",
 });
 import { useRouter } from "vue-router";
@@ -59,10 +59,8 @@ const login = async () => {
   });
 
   if (data.value?.success) {
-    //localStorage.setItem('admin_token', data.value.token as string)
     const cookie = useCookie("admin_token");
-    cookie.value = data.value.token; // ได้จาก API หลัง login
-
+    cookie.value = data.value.token;
     router.push("/admin/add");
   } else {
     error.value = data.value?.message || "Login failed";

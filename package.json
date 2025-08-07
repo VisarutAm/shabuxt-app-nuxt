@@ -19,9 +19,11 @@
     "jwt-decode": "^4.0.0",
     "nuxt": "^4.0.1",
     "pinia": "^3.0.3",
+    "sweetalert2": "^11.22.2",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@nuxt/types": "^2.18.1",

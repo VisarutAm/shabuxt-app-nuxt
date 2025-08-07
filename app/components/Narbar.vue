@@ -37,30 +37,8 @@ const scrollToMenu = () => {
             <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1.5 rounded-full">{{ totalQuantity }}</span>
           </NuxtLink>
         </li>
-      </ul>
-
-      <!-- Mobile menu icon -->
-      <!-- <div class="md:hidden">
-        <button @click="toggleMenu" class="text-xl">
-          ☰
-        </button>
-      </div> -->
+      </ul>     
     </nav>
-
-    <!-- Mobile Menu -->
-    <!-- <div v-if="isMenuOpen" class="md:hidden px-4 pb-4">
-      <ul class="flex flex-col gap-4 text-lg font-medium">
-        <li>
-          <NuxtLink to="#menu" class="hover:text-primary transition-colors">Menu</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/orders" class="flex items-center gap-2">
-            <NuxtImg width="28" src="/add-to-basket.png" format="webp" alt="orders" />
-            <span>Orders</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div> -->
   </header>
 </template>
 

@@ -5,6 +5,6 @@ import Narbar from '~/components/Narbar.vue'
 <template>
   <div>
     <Narbar />
-    <NuxtPage /> <!-- ✅ ต้องมี -->  
+    <NuxtPage /> 
   </div>
 </template>

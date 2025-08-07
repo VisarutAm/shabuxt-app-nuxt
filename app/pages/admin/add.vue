@@ -65,18 +65,6 @@ const isSubmitting = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
 
-
-// const handleSubmit = async () => {
-//   console.log('Form submitted:', form.value)
-
-//   // ส่งไปยัง API ก็ได้ เช่น:
-//   // await $fetch('/api/admin/products', {
-//   //   method: 'POST',
-//   //   body: form.value,
-//   // })
-
-//   alert('Product submitted!')
-// }
 const handleSubmit = async () => {
   if (
     !form.value.name ||
@@ -124,6 +112,3 @@ const handleSubmit = async () => {
 </script>
 
 
-<!-- const updatePreview = () => {
-  previewImage.value = form.value.image_url
-} -->

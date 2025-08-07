@@ -1,7 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-300 via-purple-300 to-indigo-900 p-8 ">
+  <div
+    class="min-h-screen bg-gradient-to-br from-purple-300 via-purple-300 to-indigo-900 p-8"
+  >
     <div class="max-w-2xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
-      <h1 class="text-2xl font-bold text-center mb-6 text-purple-800">Edit Product</h1>
+      <h1 class="text-2xl font-bold text-center mb-6 text-purple-800">
+        Edit Product
+      </h1>
 
       <form @submit.prevent="handleSubmit" class="space-y-4">
         <input
@@ -51,7 +55,7 @@
           :disabled="isSubmitting"
           class="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded font-semibold disabled:opacity-50"
         >
-          {{ isSubmitting ? '⌛ Wait...' : '✅ Save Changes' }}
+          {{ isSubmitting ? "⌛ Wait..." : "✅ Save Changes" }}
         </button>
       </form>
     </div>
@@ -62,10 +66,11 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { Product } from "../../../../types/types";
+import { useToast } from "vue-toastification";
 
 const route = useRoute();
 const router = useRouter();
-
+const toast = useToast();
 
 const form = ref<Product>({
   id: 0,
@@ -81,21 +86,19 @@ const isSubmitting = ref(false);
 
 const fetchProduct = async (id: number) => {
   try {
-    const data = await $fetch<{data:Product}>(`/api/admin/${id}`);
-    form.value = data.data;    
-    console.log("📦 Product data fetched:", data);
+    const data = await $fetch<{ data: Product }>(`/api/admin/${id}`);
+    form.value = data.data;
     previewImage.value = data.data.image_url;
   } catch (error) {
-    alert("โหลดข้อมูลสินค้าไม่สำเร็จ");
+    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ");
     router.push("/admin/products");
   }
 };
 
-
 onMounted(() => {
   const id = Number(route.params.id);
   if (!id) {
-    alert("Invalid product ID");
+    toast.error("Invalid product ID");
     router.push("/admin/products");
     return;
   }
@@ -109,7 +112,7 @@ const handleSubmit = async () => {
     !form.value.price ||
     !form.value.image_url
   ) {
-    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+    toast.error("กรุณากรอกข้อมูลให้ครบถ้วน");
     return;
   }
 
@@ -128,13 +131,12 @@ const handleSubmit = async () => {
       throw new Error(res.message || "แก้ไขสินค้าไม่สำเร็จ");
     }
 
-    alert("แก้ไขสินค้าเรียบร้อยแล้ว");
+    toast.success("แก้ไขสินค้าเรียบร้อยแล้ว");
     router.push("/admin/products");
   } catch (error: any) {
-    alert(error.message || "เกิดข้อผิดพลาดในการแก้ไขสินค้า");
+    toast.error("เกิดข้อผิดพลาดในการแก้ไขสินค้า");
   } finally {
     isSubmitting.value = false;
   }
 };
 </script>
-
