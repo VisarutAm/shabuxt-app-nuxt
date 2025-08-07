@@ -3,7 +3,8 @@ import FoodCard from "~/components/Foodcard.vue";
 import { ref } from "vue";
 import type { Product } from "../../types/types";
 import { useBookingStore } from "~/store/useBookingStore";
-import { useToast } from "vue-toastification";
+import { useToast, POSITION } from 'vue-toastification'; 
+import type { PluginOptions } from 'vue-toastification';
 
 const bookingStore = useBookingStore();
 const {
@@ -66,11 +67,15 @@ function submitBooking(e: Event) {
   e.preventDefault();
 
   if (!bookingName.value) {
-    toast.error("กรุณากรอกชื่อ");
+    toast.error("กรุณากรอกชื่อ",{
+  position: POSITION.TOP_CENTER, 
+});
     return;
   }
   if (!selectedTable.value) {
-    toast.error("กรุณาเลือกโต๊ะ");
+    toast.error("กรุณาเลือกโต๊ะ",{
+  position: POSITION.TOP_CENTER, 
+});
     return;
   }
 
@@ -79,7 +84,9 @@ function submitBooking(e: Event) {
 
   toast.success(
     `จองโต๊ะหมายเลข ${selectedTable.value} สำหรับคุณ ${bookingName.value} เรียบร้อยแล้ว`
-  );
+  ,{
+  position: POSITION.TOP_CENTER, 
+});
 
   closeModal();
 }

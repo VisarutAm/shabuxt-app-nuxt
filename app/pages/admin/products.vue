@@ -50,11 +50,13 @@ definePageMeta({
   middleware: "admin",
 });
 
-import { useToast } from "vue-toastification";
-import type { Product } from "../../../types/types";
-const router = useRouter();
-const toast = useToast();
 import Swal from "sweetalert2";
+import type { Product } from "../../../types/types";
+import { useToast, POSITION } from 'vue-toastification'; 
+import type { PluginOptions } from 'vue-toastification';
+
+const toast = useToast();
+const router = useRouter();
 
 const editProduct = (id: number) => {
   router.push(`/admin/edit/${id}`);
@@ -97,7 +99,7 @@ const fetchProducts = async () => {
     const data = await $fetch<Product[]>("/api/products");
     productData.value = data;
   } catch (error) {
-    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ");
+    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ",{position: POSITION.TOP_CENTER,});
   }
 };
 
@@ -105,3 +107,4 @@ onMounted(async () => {
   await fetchProducts();
 });
 </script>
+
