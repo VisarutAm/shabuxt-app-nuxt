@@ -6,7 +6,7 @@ import { useBookingStore } from "~/store/useBookingStore";
 import { POSITION } from 'vue-toastification';
 import { useToastClient } from '~/composables/useToastClient';
 
-const toast = await useToastClient(); // ✅ เรียกจาก composable
+const toast = await useToastClient(); 
 
 
 const bookingStore = useBookingStore();

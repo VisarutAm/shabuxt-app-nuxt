@@ -52,9 +52,10 @@ definePageMeta({
 
 import Swal from "sweetalert2";
 import type { Product } from "../../../types/types";
-import { useToast, POSITION } from 'vue-toastification';
+import {POSITION } from 'vue-toastification';
+import { useToastClient } from '~/composables/useToastClient';
 
-const toast = useToast();
+const toast = await useToastClient(); 
 const router = useRouter();
 
 const editProduct = (id: number) => {
@@ -98,7 +99,7 @@ const fetchProducts = async () => {
     const data = await $fetch<Product[]>("/api/products");
     productData.value = data;
   } catch (error) {
-    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ",{position: POSITION.TOP_CENTER,});
+    toast?.error("โหลดข้อมูลสินค้าไม่สำเร็จ",{position: POSITION.TOP_CENTER,});
   }
 };
 

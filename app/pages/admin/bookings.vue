@@ -63,10 +63,12 @@ definePageMeta({
 });
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
-// @ts-ignore
-import { useToast, POSITION } from 'vue-toastification';
 
-const toast = useToast();
+import { POSITION } from 'vue-toastification';
+import { useToastClient } from '~/composables/useToastClient';
+
+const toast = await useToastClient(); 
+
 const bookingData = ref<Booking[] | null>(null);
 
 const fetchBookings = async () => {
@@ -122,7 +124,7 @@ const deleteBooking = async (id: number) => {
       throw new Error(res.message || "ลบสินค้าไม่สำเร็จ");
     }
   } catch (err: any) {
-    toast.error("เกิดข้อผิดพลาดในการลบ",{
+    toast?.error("เกิดข้อผิดพลาดในการลบ",{
   position: POSITION.TOP_CENTER, 
 });
   }
