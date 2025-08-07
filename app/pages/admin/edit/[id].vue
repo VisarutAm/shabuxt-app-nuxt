@@ -66,11 +66,10 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { Product } from "../../../../types/types";
-import Toastification from 'vue-toastification';
 
-const { useToast, POSITION } = Toastification as any;
+import { useToast, POSITION } from 'vue-toastification';
 
-import type { PluginOptions } from 'vue-toastification';
+
 
 const route = useRoute();
 const router = useRouter();

@@ -52,9 +52,7 @@ definePageMeta({
 
 import Swal from "sweetalert2";
 import type { Product } from "../../../types/types";
-import Toastification from 'vue-toastification';
-const { useToast, POSITION } = Toastification as any;
-import type { PluginOptions } from 'vue-toastification';
+import { useToast, POSITION } from 'vue-toastification';
 
 const toast = useToast();
 const router = useRouter();

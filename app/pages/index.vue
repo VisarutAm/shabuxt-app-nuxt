@@ -3,11 +3,10 @@ import FoodCard from "~/components/Foodcard.vue";
 import { ref } from "vue";
 import type { Product } from "../../types/types";
 import { useBookingStore } from "~/store/useBookingStore";
-import Toastification from 'vue-toastification';
-const { useToast, POSITION } = Toastification as any;
-import type { PluginOptions } from 'vue-toastification';
+import { useToast, POSITION } from 'vue-toastification';
 
 const bookingStore = useBookingStore();
+
 const {
   data: productData,
   error,

@@ -64,9 +64,7 @@ definePageMeta({
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
 // @ts-ignore
-import Toastification from 'vue-toastification';
-const { useToast, POSITION } = Toastification as any;
-import type { PluginOptions } from 'vue-toastification';
+import { useToast, POSITION } from 'vue-toastification';
 
 const toast = useToast();
 const bookingData = ref<Booking[] | null>(null);
