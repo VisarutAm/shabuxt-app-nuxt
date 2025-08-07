@@ -65,10 +65,10 @@ definePageMeta({
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
 
-
+import { POSITION } from "vue-toastification";
 import { useToastClient } from "~/composables/useToastClient.client";
-const toast = ref<any>(null);
-const POSITION = toast.value.POSITION;
+
+let toast: any;
 
 const bookingData = ref<Booking[] | null>(null);
 
@@ -91,7 +91,7 @@ const fetchBookings = async () => {
       bookingData.value = data.value;
     }
   } catch (error) {
-    toast.value?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
+    toast?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
       position: POSITION.TOP_CENTER,
     });
   }
@@ -104,7 +104,7 @@ const fetchBookings = async () => {
 //   await fetchBookings();
 // });
 onMounted(async () => {
-  toast.value = await useToastClient();
+  toast = await useToastClient();
   const { data } = await useLazyFetch<Booking[]>("/api/bookings");
   bookingData.value = data.value || [];
 });
@@ -145,7 +145,7 @@ const deleteBooking = async (id: number) => {
       throw new Error(res.message || "ลบสินค้าไม่สำเร็จ");
     }
   } catch (err: any) {
-    toast.value?.error("เกิดข้อผิดพลาดในการลบ", {
+    toast?.error("เกิดข้อผิดพลาดในการลบ", {
       position: POSITION.TOP_CENTER,
     });
   }
