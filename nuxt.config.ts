@@ -15,4 +15,5 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  plugins: ["~/plugins/vue-toastification.client.ts"],
 });

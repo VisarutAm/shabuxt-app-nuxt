@@ -1,7 +1,8 @@
-import Toast from "vue-toastification";
+import Toast, * as ToastModule from "vue-toastification";
 import type { PluginOptions } from "vue-toastification";
 import "vue-toastification/dist/index.css";
-import { POSITION } from "vue-toastification";
+
+const { POSITION } = ToastModule;
 export default defineNuxtPlugin((nuxtApp) => {
   const options: PluginOptions = {
     position: POSITION.TOP_CENTER,
