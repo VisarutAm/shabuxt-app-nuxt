@@ -16,4 +16,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   plugins: ["~/plugins/vue-toastification.client.ts"],
+  routeRules: {
+    "/admin/bookings": { ssr: false },
+  },
 });

@@ -87,7 +87,9 @@ const bookingData = ref<Booking[] | null>(null);
 const fetchBookings = async () => {
   try {
     const { data, error } = await useFetch<Booking[]>("/api/bookings");
-    bookingData.value = data.value || [];
+    if (data?.value) {
+      bookingData.value = data.value;
+    }
   } catch (error) {
     toast.value?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
       position: POSITION.TOP_CENTER,
@@ -97,10 +99,16 @@ const fetchBookings = async () => {
 
 //const bookings = computed(() => bookingData.value || []);
 
+// onMounted(async () => {
+//   toast.value = await useToastClient();
+//   await fetchBookings();
+// });
 onMounted(async () => {
   toast.value = await useToastClient();
-  await fetchBookings();
+  const { data } = await useLazyFetch<Booking[]>("/api/bookings");
+  bookingData.value = data.value || [];
 });
+
 import { ref } from "vue";
 
 const expandedIndex = ref<number | null>(null);
