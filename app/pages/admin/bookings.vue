@@ -88,9 +88,12 @@ const fetchBookings = async () => {
     const { data, error } = await useFetch<Booking[]>("/api/bookings");
     bookingData.value = data.value || [];
   } catch (error) {
-    toast?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
-      position: POSITION.TOP_CENTER,
-    });
+    if (process.client) {
+      const toastModule = await import("vue-toastification");
+      toastModule.useToast().error("โหลดข้อมูลไม่สำเร็จ", {
+        position: POSITION.TOP_CENTER,
+      });
+    }
   }
 };
 
