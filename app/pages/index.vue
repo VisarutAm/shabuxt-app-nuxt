@@ -3,7 +3,9 @@ import FoodCard from "~/components/Foodcard.vue";
 import { ref } from "vue";
 import type { Product } from "../../types/types";
 import { useBookingStore } from "~/store/useBookingStore";
-import { useToast, POSITION } from 'vue-toastification'; 
+// @ts-ignore
+const toastModule = require('vue-toastification');
+const { useToast, POSITION } = toastModule; 
 import type { PluginOptions } from 'vue-toastification';
 
 const bookingStore = useBookingStore();

@@ -66,7 +66,9 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { Product } from "../../../../types/types";
-import { useToast, POSITION } from 'vue-toastification'; 
+// @ts-ignore
+const toastModule = require('vue-toastification');
+const { useToast, POSITION } = toastModule; 
 import type { PluginOptions } from 'vue-toastification';
 
 const route = useRoute();
