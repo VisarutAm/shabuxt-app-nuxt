@@ -48,6 +48,7 @@
 definePageMeta({
   layout: "admin",
   middleware: "admin",
+  
 });
 
 import Swal from "sweetalert2";

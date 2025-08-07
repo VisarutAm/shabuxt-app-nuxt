@@ -60,6 +60,7 @@
 definePageMeta({
   layout: "admin",
   middleware: "admin",
+  ssr: false, // ❗ เพิ่มบรรทัดนี้
 });
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
