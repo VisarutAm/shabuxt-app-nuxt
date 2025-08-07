@@ -65,10 +65,10 @@ definePageMeta({
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
 
-import { POSITION } from "vue-toastification";
-import { useToastClient } from "~/composables/useToastClient.client";
 
+import { useToastClient } from "~/composables/useToastClient.client";
 const toast = ref<any>(null);
+const POSITION = toast.value.POSITION;
 
 const bookingData = ref<Booking[] | null>(null);
 
