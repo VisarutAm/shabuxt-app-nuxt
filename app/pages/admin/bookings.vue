@@ -5,7 +5,7 @@
     <h1 class="text-2xl font-bold mb-4 text-center">Bookings</h1>
 
     <div
-      v-for="(booking,index) in bookingData"
+      v-for="(booking, index) in bookingData"
       :key="booking.id"
       class="border p-4 rounded-lg shadow-sm bg-white mb-2"
     >
@@ -67,7 +67,7 @@ import Swal from "sweetalert2";
 import { POSITION } from "vue-toastification";
 import { useToastClient } from "~/composables/useToastClient.client";
 
-const toast = await useToastClient();
+const toast = ref<any>(null);
 
 const bookingData = ref<Booking[] | null>(null);
 
@@ -88,18 +88,16 @@ const fetchBookings = async () => {
     const { data, error } = await useFetch<Booking[]>("/api/bookings");
     bookingData.value = data.value || [];
   } catch (error) {
-    if (process.client) {
-      const toastModule = await import("vue-toastification");
-      toastModule.useToast().error("โหลดข้อมูลไม่สำเร็จ", {
-        position: POSITION.TOP_CENTER,
-      });
-    }
+    toast.value?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
+      position: POSITION.TOP_CENTER,
+    });
   }
 };
 
 //const bookings = computed(() => bookingData.value || []);
 
 onMounted(async () => {
+  toast.value = await useToastClient();
   await fetchBookings();
 });
 import { ref } from "vue";
@@ -138,7 +136,7 @@ const deleteBooking = async (id: number) => {
       throw new Error(res.message || "ลบสินค้าไม่สำเร็จ");
     }
   } catch (err: any) {
-    toast?.error("เกิดข้อผิดพลาดในการลบ", {
+    toast.value?.error("เกิดข้อผิดพลาดในการลบ", {
       position: POSITION.TOP_CENTER,
     });
   }
