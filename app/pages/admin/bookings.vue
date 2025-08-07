@@ -73,7 +73,8 @@ const bookingData = ref<Booking[] | null>(null);
 
 const fetchBookings = async () => {
   const { data, error } = await useFetch<Booking[]>("/api/bookings", {
-    key: "fetch-bookings-" + Date.now(), // ป้องกัน cache
+    key: "fetch-bookings"
+
   });
   if (error.value) {
     console.error("❌ Error loading bookings:", error.value);
