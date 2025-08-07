@@ -67,13 +67,15 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { Product } from "../../../../types/types";
 
-import { useToast, POSITION } from 'vue-toastification';
+import { POSITION } from 'vue-toastification';
+import { useToastClient } from '~/composables/useToastClient';
 
+const toast = await useToastClient(); // ✅ เรียกจาก composable
 
 
 const route = useRoute();
 const router = useRouter();
-const toast = useToast();
+
 
 const form = ref<Product>({
   id: 0,
@@ -93,7 +95,7 @@ const fetchProduct = async (id: number) => {
     form.value = data.data;
     previewImage.value = data.data.image_url;
   } catch (error) {
-    toast.error("โหลดข้อมูลสินค้าไม่สำเร็จ", {
+    toast?.error("โหลดข้อมูลสินค้าไม่สำเร็จ", {
   position: POSITION.TOP_CENTER, 
 });
     router.push("/admin/products");
@@ -103,7 +105,7 @@ const fetchProduct = async (id: number) => {
 onMounted(() => {
   const id = Number(route.params.id);
   if (!id) {
-    toast.error("Invalid product ID",{
+    toast?.error("Invalid product ID",{
   position: POSITION.TOP_CENTER, 
 });
     router.push("/admin/products");
@@ -119,7 +121,7 @@ const handleSubmit = async () => {
     !form.value.price ||
     !form.value.image_url
   ) {
-    toast.error("กรุณากรอกข้อมูลให้ครบถ้วน",{
+    toast?.error("กรุณากรอกข้อมูลให้ครบถ้วน",{
   position: POSITION.TOP_CENTER, 
 });
     return;
@@ -140,12 +142,12 @@ const handleSubmit = async () => {
       throw new Error(res.message || "แก้ไขสินค้าไม่สำเร็จ");
     }
 
-    toast.success("แก้ไขสินค้าเรียบร้อยแล้ว",{
+    toast?.success("แก้ไขสินค้าเรียบร้อยแล้ว",{
   position: POSITION.TOP_CENTER, 
 });
     router.push("/admin/products");
   } catch (error: any) {
-    toast.error("เกิดข้อผิดพลาดในการแก้ไขสินค้า",{
+    toast?.error("เกิดข้อผิดพลาดในการแก้ไขสินค้า",{
   position: POSITION.TOP_CENTER, 
 });
   } finally {

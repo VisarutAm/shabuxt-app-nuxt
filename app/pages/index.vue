@@ -3,7 +3,11 @@ import FoodCard from "~/components/Foodcard.vue";
 import { ref } from "vue";
 import type { Product } from "../../types/types";
 import { useBookingStore } from "~/store/useBookingStore";
-import { useToast, POSITION } from 'vue-toastification';
+import { POSITION } from 'vue-toastification';
+import { useToastClient } from '~/composables/useToastClient';
+
+const toast = await useToastClient(); // ✅ เรียกจาก composable
+
 
 const bookingStore = useBookingStore();
 
@@ -13,7 +17,6 @@ const {
   pending,
 } = await useFetch<Product[]>("/api/products");
 const products = computed(() => productData.value || []);
-const toast = useToast();
 
 // เก็บข้อมูลโต๊ะ 25 ตัว
 const tables = ref(
@@ -67,13 +70,13 @@ function submitBooking(e: Event) {
   e.preventDefault();
 
   if (!bookingName.value) {
-    toast.error("กรุณากรอกชื่อ",{
+    toast?.error("กรุณากรอกชื่อ",{
   position: POSITION.TOP_CENTER, 
 });
     return;
   }
   if (!selectedTable.value) {
-    toast.error("กรุณาเลือกโต๊ะ",{
+    toast?.error("กรุณาเลือกโต๊ะ",{
   position: POSITION.TOP_CENTER, 
 });
     return;
@@ -82,7 +85,7 @@ function submitBooking(e: Event) {
   bookingStore.setBookingName(bookingName.value);
   bookingStore.setTable(selectedTable.value);
 
-  toast.success(
+  toast?.success(
     `จองโต๊ะหมายเลข ${selectedTable.value} สำหรับคุณ ${bookingName.value} เรียบร้อยแล้ว`
   ,{
   position: POSITION.TOP_CENTER, 
