@@ -65,7 +65,7 @@ import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
 
 import { POSITION } from 'vue-toastification';
-import { useToastClient } from '~/composables/useToastClient';
+import { useToastClient } from '~/composables/useToastClient.client';
 
 const toast = await useToastClient(); 
 

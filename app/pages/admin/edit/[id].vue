@@ -68,7 +68,7 @@ import { useRoute, useRouter } from "vue-router";
 import type { Product } from "../../../../types/types";
 
 import { POSITION } from 'vue-toastification';
-import { useToastClient } from '~/composables/useToastClient';
+import { useToastClient } from '~/composables/useToastClient.client';
 
 const toast = await useToastClient(); // ✅ เรียกจาก composable
 
