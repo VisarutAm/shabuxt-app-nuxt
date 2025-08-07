@@ -5,7 +5,7 @@
     <h1 class="text-2xl font-bold mb-4 text-center">Bookings</h1>
 
     <div
-      v-for="(booking, index) in bookings"
+      v-for="(booking,index) in bookingData"
       :key="booking.id"
       class="border p-4 rounded-lg shadow-sm bg-white mb-2"
     >
@@ -94,7 +94,7 @@ const fetchBookings = async () => {
   }
 };
 
-const bookings = computed(() => bookingData.value || []);
+//const bookings = computed(() => bookingData.value || []);
 
 onMounted(async () => {
   await fetchBookings();
