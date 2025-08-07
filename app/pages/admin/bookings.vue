@@ -64,23 +64,34 @@ definePageMeta({
 import type { Booking } from "~~/types/types";
 import Swal from "sweetalert2";
 
-import { POSITION } from 'vue-toastification';
-import { useToastClient } from '~/composables/useToastClient.client';
+import { POSITION } from "vue-toastification";
+import { useToastClient } from "~/composables/useToastClient.client";
 
-const toast = await useToastClient(); 
+const toast = await useToastClient();
 
 const bookingData = ref<Booking[] | null>(null);
 
-const fetchBookings = async () => {
-  const { data, error } = await useFetch<Booking[]>("/api/bookings", {
-    key: "fetch-bookings"
+// const fetchBookings = async () => {
+//   const { data, error } = await useFetch<Booking[]>("/api/bookings", {
+//     key: "fetch-bookings"
 
-  });
-  if (error.value) {
-    console.error("❌ Error loading bookings:", error.value);
-    return;
+//   });
+//   if (error.value) {
+//     console.error("❌ Error loading bookings:", error.value);
+//     return;
+//   }
+//   bookingData.value = data.value || [];
+// };
+
+const fetchBookings = async () => {
+  try {
+    const { data, error } = await useFetch<Booking[]>("/api/bookings");
+    bookingData.value = data.value || [];
+  } catch (error) {
+    toast?.error("โหลดข้อมูลกาจองไม่สำเร็จ", {
+      position: POSITION.TOP_CENTER,
+    });
   }
-  bookingData.value = data.value || [];
 };
 
 const bookings = computed(() => bookingData.value || []);
@@ -124,9 +135,9 @@ const deleteBooking = async (id: number) => {
       throw new Error(res.message || "ลบสินค้าไม่สำเร็จ");
     }
   } catch (err: any) {
-    toast?.error("เกิดข้อผิดพลาดในการลบ",{
-  position: POSITION.TOP_CENTER, 
-});
+    toast?.error("เกิดข้อผิดพลาดในการลบ", {
+      position: POSITION.TOP_CENTER,
+    });
   }
 };
 </script>
