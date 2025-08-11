@@ -1,75 +1,41 @@
-# Nuxt Minimal Starter
+# 🥘 Shabu Restaurant Booking System
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+ระบบจองโต๊ะและสั่งอาหารออนไลน์สำหรับร้านชาบู  
+พัฒนาโดยใช้ **Nuxt 3 + Pinia + Supabase + Cloudinary**  
+รองรับทั้ง **ฝั่งลูกค้า** และ **ฝั่งแอดมิน** พร้อม SEO
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 📚 ฟีเจอร์หลัก
 
+### 🎯 ฝั่งลูกค้า
+- จองโต๊ะล่วงหน้า
+- เลือกเมนูและสั่งอาหารออนไลน์
+- อัปโหลด/ดูรูปเมนู
+- ระบบค้นหาและจัดหมวดหมู่เมนู
+- รองรับมือถือ (Responsive Design)
+
+### 🛠 ฝั่งแอดมิน
+- จัดการเมนู (เพิ่ม / แก้ไข / ลบ)
+- จัดการคำสั่งซื้อ
+- จัดการสถานะโต๊ะ
+- อัปโหลดรูปเมนูไปที่ Cloudinary
+
+---
+
+## 🏗 เทคโนโลยีที่ใช้
+
+- **Frontend**: [Nuxt 3](https://nuxt.com/) + [Pinia](https://pinia.vuejs.org/)
+- **Backend**: [Supabase](https://supabase.com/) (Auth + Database)
+- **Image Storage**: [Cloudinary](https://cloudinary.com/)
+- **UI Framework**: Tailwind CSS
+- **SEO**: Nuxt SEO Meta
+
+---
+
+## 📦 การติดตั้ง
+
+### 1. Clone โปรเจ็ค
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+git clone https://github.com/username/shabu-booking.git
+cd shabu-booking
