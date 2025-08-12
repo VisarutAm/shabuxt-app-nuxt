@@ -1,11 +1,15 @@
 # 🥘 Shabu Restaurant Booking System
 
-Developed an online table reservation and food ordering system for a Shabu restaurant using Nuxt 3, Pinia, Supabase with full customer/admin functionality.
+Developed an online table reservation and food ordering system for a Shabu restaurant using Nuxt 3, Pinia, and Supabase with full customer/admin functionality.
 
--User Panel: https://shabuxt-app-nuxt.vercel.app
--Admin Panel: https://shabuxt-app-nuxt.vercel.app/admin/login
-  -- Email: admin@example.com
-  -- Password: supersecret
+## User Panel
+🔗 https://shabuxt-app-nuxt.vercel.app
+
+## Admin Panel
+🔗 https://shabuxt-app-nuxt.vercel.app/admin/login  
+
+**Email:** `admin@example.com`  
+**Password:** `supersecret`
 ---
 
 ## 🏗 Tech Stack
